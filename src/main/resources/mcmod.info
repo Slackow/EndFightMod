@@ -1,0 +1,16 @@
+[
+{
+  "modid": "endfightmod",
+  "name": "End Fight Mod",
+  "description": "Made to make practicing end fights easy",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Slackow"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
