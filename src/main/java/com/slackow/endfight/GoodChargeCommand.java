@@ -38,7 +38,7 @@ public class GoodChargeCommand extends CommandBase {
                         dist = Integer.parseUnsignedInt(args[0]);
                         height = Integer.parseUnsignedInt(args[1]);
                     } catch (NumberFormatException e) {
-                        throw new CommandException("Invalid input");
+                        throw new CommandException("invalid.input");
                     }
                 }
 

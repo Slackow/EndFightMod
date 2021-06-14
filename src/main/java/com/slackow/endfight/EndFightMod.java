@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -16,6 +17,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.StringJoiner;
 
@@ -23,6 +26,8 @@ import java.util.StringJoiner;
 public class EndFightMod {
     public static final String MODID = "endfightmod";
     public static final String VERSION = "1.0";
+
+    public static long time;
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
@@ -47,6 +52,7 @@ public class EndFightMod {
         registerCommand(new GetInvCommand());
         registerCommand(new SetInvCommand());
         registerCommand(new KillCrystalsCommand());
+        registerCommand(new HealCommand());
         registerCommand(new DragonHealthCommand());
         registerCommand(new GoodChargeCommand());
         registerCommand(ChargeCommand.command);
@@ -68,6 +74,17 @@ public class EndFightMod {
         if (e.entity instanceof EntityDragon) {
             Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("Dragon damaged by " + e.source.getDamageType() + ": " + e.ammount));
         }
+    }
+
+    @SubscribeEvent
+    public void onDragonDeath(LivingDeathEvent e) {
+        if (e.entity instanceof EntityDragon && EndFightMod.time > 0) {
+            long millis = System.currentTimeMillis() - EndFightMod.time;
+            Minecraft.getMinecraft().thePlayer.addChatComponentMessage(
+                    new ChatComponentText("Dragon Killed in about " + LocalTime.ofSecondOfDay(millis/1000).format(DateTimeFormatter.ofPattern("mm:ss"))));
+            EndFightMod.time = 0;
+        }
+
     }
 
 

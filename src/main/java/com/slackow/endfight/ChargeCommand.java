@@ -44,7 +44,7 @@ public class ChargeCommand extends CommandBase {
                         Field field_70993_bI = FieldUtils.getField(EntityDragon.class, "field_70993_bI", true);
                         FieldUtils.writeField(field_70993_bI == null ? FieldUtils.getField(EntityDragon.class, "target", true) : field_70993_bI, entityDragon, sender, true);
                     } catch (IllegalAccessException e) {
-                        throw new CommandException("Failed to force Dragon Charge, might wanna report this");
+                        throw new CommandException("failed.dragon.charge");
                     }
 
                 sender.addChatMessage(new ChatComponentText("Forced Dragon Charge"));

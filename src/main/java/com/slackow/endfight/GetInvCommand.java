@@ -48,7 +48,7 @@ public class GetInvCommand extends CommandBase {
             }
             player.inventory.inventoryChanged = true;
         } catch (IOException | JsonSyntaxException e) {
-            throw new CommandException("Unable To Read inv.txt");
+            throw new CommandException("file.read.error");
         }
     }
 

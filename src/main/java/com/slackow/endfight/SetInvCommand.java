@@ -39,8 +39,9 @@ public class SetInvCommand extends CommandBase {
             try {
                 Files.write(GetInvCommand.getInventoryPath(), Collections.singleton(new Gson().toJson(result)));
             } catch (IOException e) {
-                throw new CommandException("Problem Saving Inventory");
+                throw new CommandException("inventory.save.failure");
             }
+            iCommandSender.addChatMessage(new ChatComponentText("Saved Inventory"));
         } else {
             iCommandSender.addChatMessage(new ChatComponentText("You cannot use this command, you must be a player"));
         }
